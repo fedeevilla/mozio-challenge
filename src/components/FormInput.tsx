@@ -15,6 +15,7 @@ import { ItemSelect } from "~/services/mockData";
 interface Props {
   title: string;
   options: ItemSelect[];
+  // eslint-disable-next-line no-unused-vars
   onChange: (i: ItemSelect) => void;
   onRemove?: MouseEventHandler<HTMLButtonElement> | null;
   value: ItemSelect;
