@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Mozio Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+_This project was developed with React and Typescript._
 
-## Available Scripts
+## Instructions 🚀
 
-In the project directory, you can run:
+You should clone this repository using the following script:
 
-### `npm start`
+```
+git clone https://github.com/fedeevilla/mozio-challenge.git
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Installation 🔧
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Just run the following commands. It's easy!
 
-### `npm test`
+```
+npm install & npm run start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Deploy 📦
 
-### `npm run build`
+I've decided to use Netlify because it has a simple Installation and Configuration flow. Netlify allows us that on every commit into `main` a new deploy runs upgrading the Site page. Also it provides us Preview Deploys, like the followings:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Live demo on: https://mozio-challenge.netlify.app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9b3fc7f9-5dc5-474b-9d76-fd9bbcfac191/deploy-status)](https://app.netlify.com/sites/mozio-challenge/deploys)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Build-with 🛠️
 
-### `npm run eject`
+- React
+- Typescript
+- Cypress
+- ESLint
+- Prettier
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Author 👨🏻‍💻
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Federico Villa** - [fedeevilla](https://github.com/fedeevilla)
