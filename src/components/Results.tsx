@@ -23,6 +23,7 @@ const Results = (): JSX.Element => {
   const location = useLocation();
   const [distances, setDistances] = useState<Distance[]>([]);
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
+  const [hasError, setError] = useState<boolean>(false);
 
   const date = new URLSearchParams(location.search).get("date");
   const passengers = new URLSearchParams(location.search).get("passengers");
@@ -38,6 +39,7 @@ const Results = (): JSX.Element => {
     setIsCalculating(true);
     fetchDistances(cities || [])
       .then(setDistances)
+      .catch(() => setError(true))
       .finally(() => setIsCalculating(false));
   }, []);
 
@@ -70,10 +72,20 @@ const Results = (): JSX.Element => {
             speed="0.65s"
             thickness="4px"
           />
-          <Text marginTop="20px !important">
+          <Text marginBottom="20px !important" marginTop="20px !important">
             Calculating results, please wait!
           </Text>
         </Stack>
+      ) : hasError ? (
+        <Text
+          color="#7786D2"
+          fontSize={16}
+          fontWeight={700}
+          marginBottom="20px !important"
+          marginTop="20px !important"
+        >
+          Oops! Something went wrong!
+        </Text>
       ) : (
         <>
           {distances?.map(({ city, distance }, index) => {
@@ -163,11 +175,11 @@ const Results = (): JSX.Element => {
               {moment(date).format("ll")}
             </Text>
           </VStack>
-          <Button variant="outline" onClick={() => navigate("/")}>
-            Back
-          </Button>
         </>
       )}
+      <Button variant="outline" onClick={() => navigate("/")}>
+        Back
+      </Button>
     </Stack>
   );
 };

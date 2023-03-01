@@ -17,9 +17,15 @@ const filterCities = (inputValue: string) => {
 };
 
 export const fetchCity = async (inputValue: string): Promise<ItemSelect[]> =>
-  new Promise((resolve) =>
-    setTimeout(() => resolve(filterCities(inputValue)), 1000)
-  );
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (inputValue === "fail") {
+        reject(Error("Promise rejected"));
+      } else {
+        resolve(filterCities(inputValue));
+      }
+    }, 1000);
+  });
 
 export const distanceBetweenTwoCities = async (
   city1: string,
@@ -33,9 +39,15 @@ export const distanceBetweenTwoCities = async (
   );
 
 export const fetchDistances = async (cities: string[]): Promise<Distance[]> =>
-  new Promise((resolve) =>
-    setTimeout(() => resolve(getDistances(cities)), 2500)
-  );
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (cities.includes("Dijon")) {
+        reject(Error("Promise rejected"));
+      } else {
+        resolve(getDistances(cities));
+      }
+    }, 2500);
+  });
 
 export const getDistances = (cities: string[]): Distance[] => {
   const res: any = [];
