@@ -15,7 +15,7 @@ const App = () => {
         bg="white"
         gap={12}
         justifyContent="space-between"
-        padding={10}
+        padding={8}
         rounded="3xl"
         width={["90%", "90%", "90%", "50%"]}
         zIndex={1}

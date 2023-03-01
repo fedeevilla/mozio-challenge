@@ -79,6 +79,7 @@ const Results = (): JSX.Element => {
       ) : hasError ? (
         <Text
           color="#7786D2"
+          data-layer="error-message"
           fontSize={16}
           fontWeight={700}
           marginBottom="20px !important"
@@ -160,18 +161,22 @@ const Results = (): JSX.Element => {
 
           <VStack paddingY={10}>
             <HStack>
-              <Text color="#7786D2" fontWeight={500}>{`${total} km`}</Text>
+              <Text
+                color="#7786D2"
+                data-layer="total"
+                fontWeight={500}
+              >{`${total} km`}</Text>
               <Text> is total distance.</Text>
             </HStack>
             <HStack>
-              <Text color="#7786D2" fontWeight={500}>
+              <Text color="#7786D2" data-layer="passengers" fontWeight={500}>
                 {passengers}
               </Text>
               <Text>{`${
                 Number(passengers) > 1 ? "passengers" : "passenger"
               }.`}</Text>
             </HStack>
-            <Text color="#7786D2" fontWeight={500}>
+            <Text color="#7786D2" data-layer="date" fontWeight={500}>
               {moment(date).format("ll")}
             </Text>
           </VStack>

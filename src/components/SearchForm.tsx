@@ -89,6 +89,7 @@ const SearchForm = (): JSX.Element => {
       </Stack>
       <Stack flexDirection="row" justifyContent="center">
         <Button
+          data-layer="submit-button"
           isDisabled={
             inputFields.some(({ value }) => value === "") ||
             passengers === 0 ||
