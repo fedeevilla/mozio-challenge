@@ -2,22 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import {
-  Button,
-  Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import moment from "moment";
+import { Button, Stack } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 
 import FormInput from "../components/FormInput";
 import { ItemSelect } from "../types";
+import DateInput from "./DateInput";
+import PassengersInput from "./PassengersInput";
 
 const SearchForm = (): JSX.Element => {
   const [passengers, setPassengers] = useState<number>(1);
@@ -66,12 +57,11 @@ const SearchForm = (): JSX.Element => {
   return (
     <>
       <Stack
-        display="flex"
-        flexDirection="row"
+        flexDirection={["column", "column", "row", "row"]}
         gap={10}
         justifyContent="center"
       >
-        <Stack display="flex" flex="1" justifyContent="flex-start" maxW={300}>
+        <Stack flex={1} justifyContent="flex-start">
           {inputFields.map((field, index) => (
             <FormInput
               key={field.id}
@@ -83,37 +73,21 @@ const SearchForm = (): JSX.Element => {
               }
             />
           ))}
-          <Stack display="flex" flexDirection="row" justifyContent="flex-start">
+          <Stack flexDirection="row" justifyContent="flex-start">
             <Button color="#7786D2" variant="link" onClick={handleAdd}>
               <PlusSquareIcon marginRight={2} /> Add destination
             </Button>
           </Stack>
         </Stack>
-        <Stack margin="0px !important" maxW={200}>
-          <Text>Passengers</Text>
-          <NumberInput
-            defaultValue={passengers}
-            margin="0px !important"
-            min={1}
-            onChange={(valueString) => setPassengers(Number(valueString))}
-          >
-            <NumberInputField />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-          <Text>Date</Text>
-          <Input
-            margin="0px !important"
-            min={moment(new Date()).format("YYYY-MM-DD")}
-            type="date"
-            value={date}
-            onChange={(ev) => setDate(ev.target.value)}
+        <Stack margin="0px !important" maxW={["100%", "100%", 130, 200]}>
+          <PassengersInput
+            passengers={passengers}
+            setPassengers={setPassengers}
           />
+          <DateInput date={date} setDate={setDate} />
         </Stack>
       </Stack>
-      <Stack display="flex" flexDirection="row" justifyContent="center">
+      <Stack flexDirection="row" justifyContent="center">
         <Button
           isDisabled={
             inputFields.some(({ value }) => value === "") ||

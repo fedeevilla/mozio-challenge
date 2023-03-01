@@ -13,14 +13,11 @@ const App = () => {
       <div className="background" />
       <Stack
         bg="white"
-        display="flex"
         gap={12}
         justifyContent="space-between"
-        maxWidth="90%"
-        minHeight={350}
-        minWidth={600}
         padding={10}
         rounded="3xl"
+        width={["90%", "90%", "90%", "50%"]}
         zIndex={1}
       >
         <Routes>

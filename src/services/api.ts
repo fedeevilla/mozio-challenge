@@ -1,4 +1,4 @@
-import { ItemSelect, Location } from "../types";
+import { Distance, ItemSelect, Location } from "../types";
 import { mockData } from "./mockData";
 
 const filterCities = (inputValue: string) => {
@@ -31,6 +31,30 @@ export const distanceBetweenTwoCities = async (
       1000
     )
   );
+
+export const fetchDistances = async (cities: string[]): Promise<Distance[]> =>
+  new Promise((resolve) =>
+    setTimeout(() => resolve(getDistances(cities)), 2500)
+  );
+
+export const getDistances = (cities: string[]): Distance[] => {
+  const res: any = [];
+
+  cities?.map((city, index) => {
+    if (index !== cities.length - 1) {
+      let distance = calculateDistanceBetweenTwoCities(
+        cities[index],
+        cities[index + 1]
+      );
+
+      res.push({ city, distance });
+    } else {
+      res.push({ city, distance: 0 });
+    }
+  });
+
+  return res;
+};
 
 export const calculateDistanceBetweenTwoCities = (
   city1: string,

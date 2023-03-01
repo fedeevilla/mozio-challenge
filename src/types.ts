@@ -7,3 +7,8 @@ export interface ItemSelect {
 }
 
 export type Location = [string, number, number];
+
+export type Distance = {
+  city: string;
+  distance: number;
+};

@@ -50,7 +50,6 @@ const FormInput = ({
         </FormLabel>
         <Stack
           alignItems="center"
-          display="flex"
           flexDirection="row"
           gap={4}
           margin="0px !important"
@@ -59,11 +58,17 @@ const FormInput = ({
             isClearable
             defaultValue={value}
             loadOptions={fetchCity}
-            placeholder="Select city from the list!"
+            placeholder="Select a city from the list!"
             styles={{
               container: (base) => ({
                 ...base,
                 flex: 1,
+              }),
+              control: (baseStyles) => ({
+                ...baseStyles,
+                borderColor: [undefined, ""].includes(selectedOption?.value)
+                  ? "red"
+                  : "inherit",
               }),
             }}
             value={selectedOption}
