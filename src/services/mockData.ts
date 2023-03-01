@@ -1,12 +1,6 @@
-export interface ItemSelect {
-  id: string;
-  value: string;
-  label: string;
-  lat: number;
-  lon: number;
-}
+import { Location } from "../types";
 
-export const mockData = [
+export const mockData: Location[] = [
   ["Paris", 48.856614, 2.352222],
   ["Marseille", 43.296482, 5.36978],
   ["Lyon", 45.764043, 4.835659],

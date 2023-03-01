@@ -4,6 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.background {
+  position: absolute;
+  width: 50%;
+  height: 50vh;
+
   background: conic-gradient(
     from 167.77deg at 26.05% 40.64%,
     rgba(207, 238, 187, 0.881587) -18.97deg,
@@ -14,5 +21,5 @@
     rgba(207, 238, 187, 0.881587) 341.03deg,
     #abe1c9 368.74deg
   );
-  /* filter: blur(150px); */
+  filter: blur(150px);
 }

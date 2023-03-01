@@ -1,5 +1,5 @@
-import React, { MouseEventHandler, useState } from "react";
-import Select from "react-select";
+import { MouseEventHandler, useState } from "react";
+import Select from "react-select/async";
 
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import {
@@ -10,11 +10,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-import { ItemSelect } from "~/services/mockData";
+import { fetchCity } from "../services/api";
+import { ItemSelect } from "../types";
 
 interface Props {
   title: string;
-  options: ItemSelect[];
   // eslint-disable-next-line no-unused-vars
   onChange: (i: ItemSelect) => void;
   onRemove?: MouseEventHandler<HTMLButtonElement> | null;
@@ -25,7 +25,6 @@ const FormInput = ({
   title,
   onChange,
   onRemove,
-  options,
   value,
 }: Props): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<ItemSelect | null>(
@@ -59,7 +58,7 @@ const FormInput = ({
           <Select
             isClearable
             defaultValue={value}
-            options={options}
+            loadOptions={fetchCity}
             placeholder="Select city from the list!"
             styles={{
               container: (base) => ({

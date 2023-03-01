@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Box, Button, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import moment from "moment";
@@ -7,23 +7,21 @@ import moment from "moment";
 import { ReactComponent as EllipseIcon } from "../icons/ellipse.svg";
 import { ReactComponent as PointsIcon } from "../icons/points.svg";
 import { ReactComponent as UbicationIcon } from "../icons/ubication.svg";
-import { calculateDistance } from "../services/distance";
-import { ItemSelect } from "../services/mockData";
+import { calculateDistanceBetweenTwoCities } from "../services/api";
 
-interface Props {
-  distances?: ItemSelect[];
-  passengers?: number;
-  date?: string;
-}
-
-const Results = ({ distances, passengers, date }: Props): JSX.Element => {
+const Results = (): JSX.Element => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const date = new URLSearchParams(location.search).get("date");
+  const passengers = new URLSearchParams(location.search).get("passengers");
+  const cities = new URLSearchParams(location.search).get("cities")?.split(",");
 
   useEffect(() => {
-    if (!distances) {
+    if (!date || !passengers || !cities?.length) {
       navigate("/");
     }
-  }, [distances]);
+  }, [date, passengers, cities]);
 
   let total: number = 0;
 
@@ -35,18 +33,20 @@ const Results = ({ distances, passengers, date }: Props): JSX.Element => {
       maxW={500}
       width="100%"
     >
-      {distances?.map((item, index) => {
-        const distance = calculateDistance(
-          distances[index].lat,
-          distances[index].lon,
-          distances[index + 1]?.lat,
-          distances[index + 1]?.lon
-        );
+      {cities?.map((item, index) => {
+        let distance = 0;
 
-        total += distance || 0;
+        if (index !== cities.length - 1) {
+          distance = calculateDistanceBetweenTwoCities(
+            cities[index],
+            cities[index + 1]
+          );
+
+          total += distance;
+        }
 
         return (
-          <VStack key={item.id} margin="0px !important" width="100%">
+          <VStack key={index} margin="0px !important" width="100%">
             <HStack gap={2} margin="0px !important" width="100%">
               <Box width="48%" />
               <Box
@@ -56,7 +56,7 @@ const Results = ({ distances, passengers, date }: Props): JSX.Element => {
                 margin="0px !important"
                 width="4%"
               >
-                {index !== distances.length - 1 ? (
+                {index !== cities.length - 1 ? (
                   <EllipseIcon />
                 ) : (
                   <UbicationIcon />
@@ -71,11 +71,11 @@ const Results = ({ distances, passengers, date }: Props): JSX.Element => {
                 width="48%"
               >
                 <Text fontSize={14} textAlign="left" width="100%">
-                  {item.label}
+                  {item}
                 </Text>
               </Box>
             </HStack>
-            {!isNaN(distance) && (
+            {index !== cities.length - 1 && (
               <HStack gap={2} margin="0px !important" width="100%">
                 <Stack
                   alignItems="center"

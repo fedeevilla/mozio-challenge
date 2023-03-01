@@ -17,33 +17,17 @@ import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
 import FormInput from "../components/FormInput";
-import { ItemSelect } from "../services/mockData";
-interface Props {
-  setDistances: React.Dispatch<React.SetStateAction<ItemSelect[] | undefined>>;
-  setPassengers: React.Dispatch<React.SetStateAction<number>>;
-  setDate: React.Dispatch<React.SetStateAction<string>>;
-  options: ItemSelect[];
-  passengers: number;
-  date: string;
-  distances?: ItemSelect[];
-}
+import { ItemSelect } from "../types";
 
-const SearchForm = ({
-  setDistances,
-  setPassengers,
-  setDate,
-  options,
-  passengers,
-  distances,
-  date,
-}: Props): JSX.Element => {
+const SearchForm = (): JSX.Element => {
+  const [passengers, setPassengers] = useState<number>(1);
+  const [date, setDate] = useState<string>("");
   const navigate = useNavigate();
-  const [inputFields, setInputFields] = useState<ItemSelect[]>(
-    distances || [
-      { id: uuidv4(), value: "", lat: 0, lon: 0, label: "" },
-      { id: uuidv4(), value: "", lat: 0, lon: 0, label: "" },
-    ]
-  );
+
+  const [inputFields, setInputFields] = useState<ItemSelect[]>([
+    { id: uuidv4(), value: "", lat: 0, lon: 0, label: "" },
+    { id: uuidv4(), value: "", lat: 0, lon: 0, label: "" },
+  ]);
 
   const handleAdd = () => {
     setInputFields([
@@ -53,7 +37,6 @@ const SearchForm = ({
   };
 
   const handleSubmit = () => {
-    setDistances(inputFields);
     const selectedCities = inputFields.map(({ value }) => value);
 
     navigate({
@@ -92,7 +75,6 @@ const SearchForm = ({
           {inputFields.map((field, index) => (
             <FormInput
               key={field.id}
-              options={options}
               title={`City of ${index === 0 ? "Origin" : "Destination"}`}
               value={field}
               onChange={(value) => handleChange(field.id, value)}
@@ -107,7 +89,7 @@ const SearchForm = ({
             </Button>
           </Stack>
         </Stack>
-        <Stack maxW={200}>
+        <Stack margin="0px !important" maxW={200}>
           <Text>Passengers</Text>
           <NumberInput
             defaultValue={passengers}
