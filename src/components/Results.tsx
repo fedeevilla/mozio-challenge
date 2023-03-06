@@ -182,7 +182,17 @@ const Results = (): JSX.Element => {
           </VStack>
         </>
       )}
-      <Button variant="outline" onClick={() => navigate("/")}>
+      <Button
+        variant="outline"
+        onClick={() =>
+          navigate({
+            pathname: "/",
+            search: `?passengers=${passengers}&date=${date}&cities=${cities?.join(
+              ","
+            )}`,
+          })
+        }
+      >
         Back
       </Button>
     </Stack>
