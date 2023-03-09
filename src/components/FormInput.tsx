@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import Select from "react-select/async";
 
 import { SmallCloseIcon } from "@chakra-ui/icons";
@@ -42,6 +42,10 @@ const FormInput = ({
     }
   };
 
+  useEffect(() => {
+    setIsError([undefined, ""].includes(selectedOption?.value));
+  }, [selectedOption?.value]);
+
   return (
     <Stack>
       <FormControl isInvalid={isError} marginBottom={3}>
@@ -66,9 +70,7 @@ const FormInput = ({
               }),
               control: (baseStyles) => ({
                 ...baseStyles,
-                borderColor: [undefined, ""].includes(selectedOption?.value)
-                  ? "red"
-                  : "inherit",
+                borderColor: isError ? "red" : "inherit",
               }),
             }}
             value={selectedOption}
